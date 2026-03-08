@@ -80,24 +80,22 @@ label {
 .tooltip-icon::after {
     content: attr(data-tooltip);
     position: absolute;
-    bottom: calc(100% + 12px);
+    bottom: 125%;
     left: 50%;
     transform: translateX(-50%) translateY(10px);
     background: #1f2937;
     color: white;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    line-height: 1.4;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
     width: 220px;
-    white-space: normal;
     text-align: center;
-    opacity: 0;
     visibility: hidden;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1001;
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 1000; /* Extremely high z-index to stay on top */
     pointer-events: none;
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .tooltip-icon::before {
@@ -116,8 +114,8 @@ label {
 
 .tooltip-icon:hover::after,
 .tooltip-icon:hover::before {
-    opacity: 1;
     visibility: visible;
+    opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
 
@@ -131,12 +129,12 @@ label {
     -webkit-appearance: none;
     -moz-appearance: none;
     width: 100%;
-    padding: 0.75rem 3.5rem 0.75rem 1rem; /* Balanced space for unit */
+    padding: 0.75rem 4.5rem 0.75rem 1rem;
     border: 1px solid #d1d5db;
     border-radius: 10px;
     font-size: 1rem;
     color: var(--text-color);
-    text-align: right !important; /* Force right alignment */
+    text-align: left !important; /* Force left alignment */
     transition: var(--transition);
     outline: none;
     box-sizing: border-box;
@@ -190,7 +188,7 @@ input[type="number"]:focus {
 
 .unit {
     position: absolute;
-    right: 2.2rem; /* Positioned just after the right-aligned text */
+    right: 2.5rem; /* Positioned to the left of the +/- buttons */
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
