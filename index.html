@@ -24,6 +24,10 @@
                 <div class="input-wrapper">
                     <input type="number" id="current-pct" placeholder="e.g. 95" step="0.1" min="0" max="100">
                     <span class="unit">%</span>
+                    <div class="input-controls">
+                        <div class="control-btn plus" data-for="current-pct">+</div>
+                        <div class="control-btn minus" data-for="current-pct">−</div>
+                    </div>
                 </div>
             </div>
 
@@ -34,6 +38,10 @@
                 <div class="input-with-toggle">
                     <div class="input-wrapper">
                         <input type="number" id="current-vol" placeholder="e.g. 1000" step="0.05" min="0">
+                        <div class="input-controls">
+                            <div class="control-btn plus" data-for="current-vol">+</div>
+                            <div class="control-btn minus" data-for="current-vol">−</div>
+                        </div>
                     </div>
                     <div class="unit-toggle">
                         <input type="radio" name="unit" id="unit-ml" value="ml" checked>
@@ -53,12 +61,17 @@
                 <div class="input-wrapper">
                     <input type="number" id="target-pct" placeholder="e.g. 40" step="0.1" min="0" max="100">
                     <span class="unit">%</span>
+                    <div class="input-controls">
+                        <div class="control-btn plus" data-for="target-pct">+</div>
+                        <div class="control-btn minus" data-for="target-pct">−</div>
+                    </div>
                 </div>
             </div>
 
             <div id="result-container" class="hidden">
                 <div class="result-label">Water to add:</div>
                 <div class="result-value"><span id="water-amount">0</span> <span id="result-unit">ml</span></div>
+                <div class="result-alt">(or <span id="water-amount-alt">0</span> <span id="result-unit-alt">L</span>)</div>
                 <div class="result-total">Total volume will be <span id="total-vol">0</span> <span
                         id="total-unit">ml</span></div>
             </div>

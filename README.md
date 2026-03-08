@@ -26,7 +26,7 @@ Use this method if you want to host the code on GitHub and simply "window" it in
    - Go to your repository settings on GitHub.
    - Click on **Pages** in the left sidebar.
    - Under "Build and deployment", set the source to **Deploy from a branch** and select `main`.
-   - Click **Save**. GitHub will give you a URL like `https://scottchristian.github.io/distillation-dilution-calculator/`.
+   - Click **Save**. GitHub will give you a URL like `https://<<username>>.github.io/<<SomeRepoName>>/`.
 
 2. **Paste this code into your website**:
    Copy and paste the following code into the place where you want the calculator to appear (in WordPress, use a "Custom HTML" block):
