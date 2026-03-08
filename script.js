@@ -103,7 +103,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     unitToggles.forEach(toggle => {
-        toggle.addEventListener('change', calculate);
+        toggle.addEventListener('change', (e) => {
+            const newUnit = e.target.value;
+            const currentVal = parseFloat(currentVolInput.value);
+
+            if (!isNaN(currentVal)) {
+                if (newUnit === 'l') {
+                    // ml -> L
+                    currentVolInput.value = parseFloat((currentVal / 1000).toFixed(4));
+                } else {
+                    // L -> ml
+                    currentVolInput.value = parseFloat((currentVal * 1000).toFixed(2));
+                }
+            }
+            calculate();
+        });
     });
 
     // Custom Controls Logic
