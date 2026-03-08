@@ -137,10 +137,11 @@ input[type="number"] {
     appearance: textfield; /* Standard property for compatibility */
     -moz-appearance: textfield; /* For Firefox */
     width: 100%;
-    padding: 0.75rem 4.5rem 0.75rem 1rem; /* Extra right padding for unit AND buttons */
+    padding: 0.75rem 4.5rem 0.75rem 1rem; /* Space for unit and buttons */
     border: 1px solid #d1d5db;
     border-radius: 10px;
     font-size: 1rem;
+    color: var(--text-color);
     transition: var(--transition);
     outline: none;
     box-sizing: border-box;
@@ -155,33 +156,36 @@ input[type="number"] {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    z-index: 5;
+    z-index: 10;
 }
 
 .control-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
+    width: 24px;
     height: 18px;
     background: #f3f4f6;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #d1d5db;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 600;
     color: var(--text-color);
     transition: var(--transition);
     user-select: none;
+    line-height: 1;
 }
 
 .control-btn:hover {
     background: #e5e7eb;
+    border-color: #9ca3af;
     color: var(--primary-color);
 }
 
 .control-btn:active {
     background: #d1d5db;
+    transform: scale(0.95);
 }
 
 input[type="number"]:focus {
@@ -191,13 +195,14 @@ input[type="number"]:focus {
 
 .unit {
     position: absolute;
-    right: 1rem;
+    right: 2.5rem; /* Move left to clear the buttons */
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
     font-weight: 600;
-    pointer-events: none; /* Ensure clicks go through to the input */
+    pointer-events: none;
     background: transparent;
+    z-index: 5;
 }
 
 .input-with-toggle {
