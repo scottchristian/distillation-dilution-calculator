@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const unitToggles = document.querySelectorAll('input[name="unit"]');
     
     const resultContainer = document.getElementById('result-container');
+    const errorMessage = document.getElementById('error-message');
     const waterAmountSpan = document.getElementById('water-amount');
     const resultUnitSpan = document.getElementById('result-unit');
     const waterAmountAltSpan = document.getElementById('water-amount-alt');
@@ -31,68 +32,68 @@ document.addEventListener('DOMContentLoaded', () => {
         const c1 = parseFloat(currentPctInput.value);
         const v1 = parseFloat(currentVolInput.value);
         const c2 = parseFloat(targetPctInput.value);
-        const unit = document.querySelector('input[name="unit"]:checked').value;
+        const selectedUnit = document.querySelector('input[name="unit"]:checked').value;
 
-        // Update placeholder based on unit
-        currentVolInput.placeholder = `e.g. ${unit === 'ml' ? '1000' : '1'}`;
+        // Reset display
+        errorMessage.classList.add('hidden');
+        errorMessage.textContent = '';
+        resultContainer.classList.add('hidden');
 
-        if (isNaN(c1) || isNaN(v1) || isNaN(c2) || c1 <= 0 || v1 <= 0 || c2 <= 0) {
-            resultContainer.classList.add('hidden');
+        // Initial check: are all fields filled?
+        if (currentPctInput.value === '' || currentVolInput.value === '' || targetPctInput.value === '') {
             return;
         }
 
-        // Only hide if we actually have no numbers at all
-        if (!currentPctInput.value || !currentVolInput.value || !targetPctInput.value) {
-            resultContainer.classList.add('hidden');
+        // Parse numbers again to handle non-numeric text gracefully
+        if (isNaN(c1) || isNaN(v1) || isNaN(c2)) {
             return;
         }
 
-        if (c2 >= c1) {
-            // Can't "dilute" to a higher percentage
-            waterAmountSpan.textContent = "0";
-            waterAmountAltSpan.textContent = "0";
-            resultUnitAltSpan.textContent = unit === 'ml' ? 'L' : 'ml';
-            totalVolSpan.textContent = v1.toFixed(c1 === c2 ? 0 : 2);
-            resultContainer.classList.remove('hidden');
+        // Validation: Target cannot be higher than current
+        if (c2 > c1) {
+            errorMessage.textContent = 'Target % cannot be higher than current alcohol %';
+            errorMessage.classList.remove('hidden');
+            return;
+        }
+
+        // If c2 is 0, we can't divide by zero
+        if (c2 <= 0) {
             return;
         }
 
         // V2 = V1 * (C1 / C2)
-        // V_water = V2 - V1
-        const v2 = v1 * (c1 / c2);
-        const vWater = v2 - v1;
-
-        // Calculate Alt Unit
-        let vWaterAlt, altUnit;
-        if (unit === 'ml') {
-            vWaterAlt = vWater / 1000;
-            altUnit = 'L';
-        } else {
-            vWaterAlt = vWater * 1000;
-            altUnit = 'ml';
-        }
+        // WaterToAdd = V2 - V1
+        const v2 = (v1 * c1) / c2;
+        const waterToAdd = v2 - v1;
 
         // Display results
-        waterAmountSpan.textContent = formatNumber(vWater);
-        resultUnitSpan.textContent = unit;
-        
-        waterAmountAltSpan.textContent = formatNumber(vWaterAlt);
-        resultUnitAltSpan.textContent = altUnit;
+        waterAmountSpan.textContent = formatNumber(waterToAdd);
+        resultUnitSpan.textContent = selectedUnit;
 
-        totalVolSpan.textContent = formatNumber(v2);
-        totalUnitSpan.textContent = unit;
+        // Alternative unit calculation
+        if (selectedUnit === 'ml') {
+            waterAmountAltSpan.textContent = formatNumber(waterToAdd / 1000);
+            resultUnitAltSpan.textContent = 'L';
+            totalVolSpan.textContent = formatNumber(v2); // Total volume remains in ml for this display
+            totalUnitSpan.textContent = selectedUnit; // Total unit remains in ml for this display
+        } else { // selectedUnit is 'L'
+            waterAmountAltSpan.textContent = formatNumber(waterToAdd * 1000);
+            resultUnitAltSpan.textContent = 'ml';
+            totalVolSpan.textContent = formatNumber(v2); // Total volume remains in L for this display
+            totalUnitSpan.textContent = selectedUnit; // Total unit remains in L for this display
+        }
 
+        // Show results with transition
         resultContainer.classList.remove('hidden');
     }
 
     function formatNumber(num) {
-        if (num >= 100) {
-            return Math.round(num).toLocaleString();
-        } else if (num >= 10) {
-            return num.toFixed(1);
-        } else {
-            return num.toFixed(2);
-        }
+        if (num === 0) return "0";
+        if (num < 0.01) return num.toFixed(4);
+        return num.toLocaleString(undefined, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2
+        });
     }
 
     // Event Listeners
