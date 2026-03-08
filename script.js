@@ -12,6 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalVolSpan = document.getElementById('total-vol');
     const totalUnitSpan = document.getElementById('total-unit');
 
+    // Prevent non-numeric characters in text inputs
+    function validateNumericInput(e) {
+        const input = e.target;
+        const val = input.value;
+        const cleanVal = val.replace(/[^0-9.]/g, ''); // Remove non-digits/dots
+        
+        // Ensure only one decimal point
+        const parts = cleanVal.split('.');
+        if (parts.length > 2) {
+            input.value = parts[0] + '.' + parts.slice(1).join('');
+        } else {
+            input.value = cleanVal;
+        }
+    }
+
     function calculate() {
         const c1 = parseFloat(currentPctInput.value);
         const v1 = parseFloat(currentVolInput.value);
@@ -82,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listeners
     [currentPctInput, currentVolInput, targetPctInput].forEach(input => {
+        input.addEventListener('input', validateNumericInput); // Add this
         input.addEventListener('input', calculate);
     });
 

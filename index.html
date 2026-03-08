@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
                         data-tooltip="The percentage of alcohol in your current mixture (e.g., 95 for high-proof spirit).">?</span>
                 </label>
                 <div class="input-wrapper">
-                    <input type="number" id="current-pct" placeholder="e.g. 95" step="0.1" min="0" max="100">
+                    <input type="text" id="current-pct" placeholder="e.g. 95" inputmode="decimal" pattern="[0-9.]*" step="0.1" min="0" max="100">
                     <span class="unit">%</span>
                     <div class="input-controls">
                         <div class="control-btn plus" data-for="current-pct">+</div>
@@ -37,7 +37,7 @@
                 </label>
                 <div class="input-with-toggle">
                     <div class="input-wrapper">
-                        <input type="number" id="current-vol" placeholder="e.g. 1000" step="0.05" min="0">
+                        <input type="text" id="current-vol" placeholder="e.g. 1000" inputmode="decimal" pattern="[0-9.]*" step="0.05" min="0">
                         <div class="input-controls">
                             <div class="control-btn plus" data-for="current-vol">+</div>
                             <div class="control-btn minus" data-for="current-vol">−</div>
@@ -59,7 +59,7 @@
                         data-tooltip="The percentage of alcohol you want to achieve (e.g., 40 for standard vodka strength).">?</span>
                 </label>
                 <div class="input-wrapper">
-                    <input type="number" id="target-pct" placeholder="e.g. 40" step="0.1" min="0" max="100">
+                    <input type="text" id="target-pct" placeholder="e.g. 40" inputmode="decimal" pattern="[0-9.]*" step="0.1" min="0" max="100">
                     <span class="unit">%</span>
                     <div class="input-controls">
                         <div class="control-btn plus" data-for="target-pct">+</div>
@@ -77,7 +77,7 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="script.js?v=1.1"></script>
 </body>
 
 </html>

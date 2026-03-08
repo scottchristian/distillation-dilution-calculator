@@ -126,22 +126,17 @@ label {
     width: 100%;
 }
 
-/* Hide default browser arrows (spinners) for a cleaner look */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+#dilution-calculator-container .input-wrapper input {
+    appearance: none;
     -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    appearance: textfield; /* Standard property for compatibility */
-    -moz-appearance: textfield; /* For Firefox */
+    -moz-appearance: none;
     width: 100%;
-    padding: 0.75rem 4.5rem 0.75rem 1rem; /* Space for unit and buttons */
+    padding: 0.75rem 3.5rem 0.75rem 1rem; /* Balanced space for unit */
     border: 1px solid #d1d5db;
     border-radius: 10px;
     font-size: 1rem;
     color: var(--text-color);
+    text-align: right !important; /* Force right alignment */
     transition: var(--transition);
     outline: none;
     box-sizing: border-box;
@@ -195,7 +190,7 @@ input[type="number"]:focus {
 
 .unit {
     position: absolute;
-    right: 2.5rem; /* Move left to clear the buttons */
+    right: 2.2rem; /* Positioned just after the right-aligned text */
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
