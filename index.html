@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alcohol Dilution Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="dilution-calculator-container">
+        <div class="calculator-card">
+            <h1>Dilution Calculator</h1>
+
+            <div class="input-group">
+                <label for="current-pct">Current Alcohol %
+                    <span class="tooltip-icon"
+                        data-tooltip="The percentage of alcohol in your current mixture (e.g., 95 for high-proof spirit).">?</span>
+                </label>
+                <div class="input-wrapper">
+                    <input type="number" id="current-pct" placeholder="e.g. 95" step="0.1" min="0" max="100">
+                    <span class="unit">%</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="current-vol">Current Volume
+                    <span class="tooltip-icon" data-tooltip="The amount of alcohol you currently have.">?</span>
+                </label>
+                <div class="input-with-toggle">
+                    <div class="input-wrapper">
+                        <input type="number" id="current-vol" placeholder="e.g. 1000" step="0.05" min="0">
+                    </div>
+                    <div class="unit-toggle">
+                        <input type="radio" name="unit" id="unit-ml" value="ml" checked>
+                        <label for="unit-ml">ml</label>
+                        <input type="radio" name="unit" id="unit-l" value="l">
+                        <label for="unit-l">L</label>
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="target-pct">Target Alcohol %
+                    <span class="tooltip-icon"
+                        data-tooltip="The percentage of alcohol you want to achieve (e.g., 40 for standard vodka strength).">?</span>
+                </label>
+                <div class="input-wrapper">
+                    <input type="number" id="target-pct" placeholder="e.g. 40" step="0.1" min="0" max="100">
+                    <span class="unit">%</span>
+                </div>
+            </div>
+
+            <div id="result-container" class="hidden">
+                <div class="result-label">Water to add:</div>
+                <div class="result-value"><span id="water-amount">0</span> <span id="result-unit">ml</span></div>
+                <div class="result-total">Total volume will be <span id="total-vol">0</span> <span
+                        id="total-unit">ml</span></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
